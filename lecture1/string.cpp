@@ -3,6 +3,11 @@
 
 int main() {
 	std::string s = "Hello!";
-	s.front() = 'G';
-	std::cout << s.front() << " " << s << "\n";
+	s[1] = 'h';
+	s.at(2) = ' ';
+	s.at(3) = 'n';
+	s.front() = 'O';
+	s.back() = '(';
+	s.push_back('!'); 
+	std::cout << s << "\n";
 }
