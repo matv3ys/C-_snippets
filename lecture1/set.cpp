@@ -1,5 +1,6 @@
 #include <iostream>
 #include <set>
+#include <string>
 
 void print_set(std::set<int> &s) {
 	for (auto &elem: s) {
