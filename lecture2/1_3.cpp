@@ -1,5 +1,52 @@
+/* 1.3. Declarations, definitions and scopes */
+
 #include <iostream> // /usr/include/c++/11/iostream
 #include <vector>
+
+// One Definition Rule (ODR)
+
+// declarations 
+// 1. Так можно  (many declarations)
+void f(int x);
+void f(int x);
+// 2. Можно
+void f(int x);
+void f();
+// 3. Нельзя
+//void f();
+//int f();
+// 4. Можно
+void f();
+int f(double x);
+
+// definitions  (Любое определение являтся объявлением)
+// 1. Так нельзя
+// void f(int x) {};
+// void f(int x) {};
+
+// 2. Так можно (overloading)
+void f(int x) {
+	std::cout << x;
+}
+
+void f() {
+    std::cout << "Hello\n";
+}
+
+void fi(int x) {
+    std::cout << x + 1 << "\n";
+}
+
+void fi(float x) {
+    std::cout << x * 2 << "\n";
+}
+
+// Некоторые причины, по которым в языке разрешено делать несколько объявлений
+// 1. include нескольких хедеров в которых есть объявление одной и той же функции
+// 2. Перекрестная рекурсия
+// int f();
+// int g() { f(); }
+// int f() { g(); }
 
 int a = 5; // global int in global scope
 
@@ -38,6 +85,20 @@ namespace std {
 // в c++ используем using а не typedef 
 
 int main() {
+
+	// Идентификатор - последовательность символов, обозначающая какую-либо сущность
+	// x; unqualified-id (идентификатор без двоеточия)
+	// N::x; qualified-id (идентификатор с двоеточием)
+
+    // Разрешения перегрузок
+	fi(1); // 2
+	fi(0.2f); // 0.4
+
+	short s = 3;
+	fi(s); // 4 (promoted to int)
+
+	//fi(0.3); // error: call to fi is ambigious (ошибка времени компиляции!) \
+	(для компилятора здесь нет разницы урезать double до int или float) 
 
 	int a = 3;
 	std::cout << ::a << " " << a << "\n"; // 5 3  (::a for global a)
